@@ -1,0 +1,39 @@
+{
+  "name": "luno-api",
+  "version": "1.0.0",
+  "description": "Luno API wrapper",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/tiaanduplessis/luno-api",
+    "type": "git"
+  },
+  "homepage": "https://github.com/tiaanduplessis/luno-api",
+  "bugs": "https://github.com/tiaanduplessis/luno-api",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "jest",
+    "lint": "prettier-standard index.js",
+    "lint:fix": "npm run lint -- --fix",
+    "start": "npm run test",
+    "precommit": "npm test",
+    "pretest": "npm run lint:fix",
+    "docs": "npm run docs:readme && npm run docs:html",
+    "docs:readme": "documentation readme index.js --section=API",
+    "docs:html": "documentation build index.js -f html -o docs"
+  },
+  "author": "tiaanduplessis <tiaanduplessis@hotmail.com>",
+  "devDependencies": {
+    "documentation": "^5.1.0",
+    "husky": "^0.14.3",
+    "jest": "^20.0.4",
+    "prettier-standard": "^6.0.0"
+  },
+  "dependencies": {
+    "fast-safe-stringify": "^1.2.0",
+    "node-fetch": "^1.7.1",
+    "qs": "^6.5.0"
+  }
+}
