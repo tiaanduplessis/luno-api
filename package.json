@@ -15,11 +15,11 @@
   ],
   "scripts": {
     "test": "jest",
-    "lint": "prettier-standard index.js",
-    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier-standard index.js",
+    "format:fix": "npm run format -- --fix",
     "start": "npm run test",
     "precommit": "npm test",
-    "pretest": "npm run lint:fix",
+    "pretest": "npm run format:fix",
     "docs": "npm run docs:readme && npm run docs:html",
     "docs:readme": "documentation readme index.js --section=API",
     "docs:html": "documentation build index.js -f html -o docs"

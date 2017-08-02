@@ -163,6 +163,126 @@
                 
                 </li>
               
+                
+                <li><a
+                  href='#getreceiveaddress'
+                  class="">
+                  getReceiveAddress
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#createreceiveaddress'
+                  class="">
+                  createReceiveAddress
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getfeeinfo'
+                  class="">
+                  getFeeInfo
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getwithdrawalrequests'
+                  class="">
+                  getWithdrawalRequests
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#requestwithdrawal'
+                  class="">
+                  requestWithdrawal
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getwithdrawalstatus'
+                  class="">
+                  getWithdrawalStatus
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#cancelwithdrawalrequest'
+                  class="">
+                  cancelWithdrawalRequest
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#send'
+                  class="">
+                  send
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#createquote'
+                  class="">
+                  createQuote
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getquote'
+                  class="">
+                  getQuote
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#exercisequote'
+                  class="">
+                  exerciseQuote
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#discardquote'
+                  class="">
+                  discardQuote
+                  
+                </a>
+                
+                </li>
+              
             </ul>
           </div>
           <div class='mt1 h6 quiet'>
@@ -223,6 +343,12 @@
   
 
   
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.getTicker().then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
 
   
 
@@ -269,6 +395,12 @@
 
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.getAllTickers().then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
   
 
   
@@ -330,6 +462,12 @@
 
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.getOrderBook().then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
   
 
   
@@ -402,6 +540,12 @@ At most 100 results are returned per call.</p>
   
 
   
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.getTrades(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-string">'7/7/7'</span>)).then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
 
   
 
@@ -429,7 +573,7 @@ At most 100 results are returned per call.</p>
   <p>Create an additional account for the specified currency.</p>
 
 
-  <div class='pre p1 fill-light mt0'>createAccount(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, currency: any)</div>
+  <div class='pre p1 fill-light mt0'>createAccount(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, currency: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</div>
   
   
 
@@ -456,8 +600,8 @@ At most 100 results are returned per call.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>currency</span> <code class='quiet'>(any
-            = <code>&#39;ZAR&#39;</code>)</code>
+            <span class='code bold'>currency</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>
+            = <code>&#39;&#39;</code>)</code>
 	    The currency code for the account you want to create e.g. XBT, IDR, MYR, ZAR
 
           </div>
@@ -521,6 +665,12 @@ At most 100 results are returned per call.</p>
   
 
   
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.getBalances().then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
 
   
 
@@ -545,10 +695,11 @@ At most 100 results are returned per call.</p>
   </div>
   
 
-  <p>Return a list of transaction entries from an account.</p>
+  <p>Return a list of transaction entries from an account.
+By default fetches the 100 most recent rows.</p>
 
 
-  <div class='pre p1 fill-light mt0'>getTransactions(id: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>), minRow: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>), maxRow: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>))</div>
+  <div class='pre p1 fill-light mt0'>getTransactions(id: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>), minRow: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)?, maxRow: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)?)</div>
   
   
 
@@ -575,8 +726,8 @@ At most 100 results are returned per call.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>minRow</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)
-            = <code>1</code>)</code>
+            <span class='code bold'>minRow</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)?
+            = <code>-100</code>)</code>
 	    Minimum of the row range to return (inclusive)
 
           </div>
@@ -585,8 +736,8 @@ At most 100 results are returned per call.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>maxRow</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)
-            = <code>100</code>)</code>
+            <span class='code bold'>maxRow</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)?
+            = <code>0</code>)</code>
 	    Maximum of the row range to return (exclusive)
 
           </div>
@@ -692,7 +843,7 @@ At most 100 results are returned per call.</p>
   <p>Returns a list of the most recently placed orders</p>
 
 
-  <div class='pre p1 fill-light mt0'>getOrderList(state: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, pair: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</div>
+  <div class='pre p1 fill-light mt0'>getOrderList(state: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?, pair: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</div>
   
   
 
@@ -709,7 +860,7 @@ At most 100 results are returned per call.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>state</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+            <span class='code bold'>state</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
 	    Filter to only orders of this state e.g. PENDING
 
           </div>
@@ -718,7 +869,7 @@ At most 100 results are returned per call.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>pair</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+            <span class='code bold'>pair</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
 	    Filter to only orders of this currency pair e.g. XBTZAR
 
           </div>
@@ -762,7 +913,7 @@ At most 100 results are returned per call.</p>
   <p>Create a new trade order.</p>
 
 
-  <div class='pre p1 fill-light mt0'>postOrder(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, volume: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, price: any, pair: any)</div>
+  <div class='pre p1 fill-light mt0'>postOrder(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, volume: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>), price: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>), pair: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</div>
   
   
 
@@ -789,7 +940,7 @@ At most 100 results are returned per call.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>volume</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>
+            <span class='code bold'>volume</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)
             = <code>&#39;&#39;</code>)</code>
 	    Amount of Bitcoin to buy or sell as a decimal string in units of BTC e.g. "1.423"
 
@@ -799,7 +950,7 @@ At most 100 results are returned per call.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>price</span> <code class='quiet'>(any
+            <span class='code bold'>price</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)
             = <code>&#39;&#39;</code>)</code>
 	    Limit price as a decimal string in units of ZAR/BTC e.g. "1200".
 
@@ -809,7 +960,7 @@ At most 100 results are returned per call.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>pair</span> <code class='quiet'>(any
+            <span class='code bold'>pair</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?
             = <code>&#39;&#39;</code>)</code>
 	    The currency pair to trade e.g. XBTZAR
 
@@ -1033,6 +1184,12 @@ For a "SELL" order: amount of Bitcoin to sell as a decimal string in units of BT
   
 
   
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.getOrder(<span class="hljs-number">1234</span>).then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
 
   
 
@@ -1060,7 +1217,7 @@ For a "SELL" order: amount of Bitcoin to sell as a decimal string in units of BT
   <p>Returns a list of your recent trades for a given pair, sorted by oldest first.</p>
 
 
-  <div class='pre p1 fill-light mt0'>getTradesList(since: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, limit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, pair: any)</div>
+  <div class='pre p1 fill-light mt0'>getTradesList(since: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, limit: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>, pair: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</div>
   
   
 
@@ -1095,7 +1252,7 @@ For a "SELL" order: amount of Bitcoin to sell as a decimal string in units of BT
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>pair</span> <code class='quiet'>(any)</code>
+            <span class='code bold'>pair</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
 	    Filter to trades of this currency pair e.g. XBTZAR
 
           </div>
@@ -1111,6 +1268,902 @@ For a "SELL" order: amount of Bitcoin to sell as a decimal string in units of BT
 
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.getTradesList(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-string">'7/7/7'</span>), <span class="hljs-number">50</span>).then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getreceiveaddress'>
+      getReceiveAddress
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Returns the default receive address associated with your account and the amount received via the address.
+You can specify an optional address parameter to return information for a non-default receive address.
+In the response, total_received is the total confirmed Bitcoin amount received excluding unconfirmed transactions.
+total_unconfirmed is the total sum of unconfirmed receive transactions.</p>
+
+
+  <div class='pre p1 fill-light mt0'>getReceiveAddress(asset: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, address: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>asset</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>
+            = <code>&#39;&#39;</code>)</code>
+	    Currency code of the asset e.g. XBT
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>address</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
+	    Specific Bitcoin address to retrieve. If not provided, the default address will be used
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.getReceiveAddress(<span class="hljs-string">'XBT'</span>).then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='createreceiveaddress'>
+      createReceiveAddress
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Allocates a new receive address to your account.
+There is a rate limit of 1 address per hour, but bursts of up to 10 addresses are allowed.</p>
+
+
+  <div class='pre p1 fill-light mt0'>createReceiveAddress(asset: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>asset</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>
+            = <code>&#39;&#39;</code>)</code>
+	    Currency code of the asset e.g. XBT
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.createReceiveAddress(<span class="hljs-string">'XBT'</span>).then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getfeeinfo'>
+      getFeeInfo
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Returns your fees and 30 day trading volume (as of midnight) for a given pair.</p>
+
+
+  <div class='pre p1 fill-light mt0'>getFeeInfo(pair: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>pair</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?
+            = <code>&#39;&#39;</code>)</code>
+	    Filter to trades of this currency pair e.g. XBTZAR
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.getFeeInfo(<span class="hljs-string">'XBTZAR'</span>).then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getwithdrawalrequests'>
+      getWithdrawalRequests
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Returns a list of withdrawal requests.</p>
+
+
+  <div class='pre p1 fill-light mt0'>getWithdrawalRequests()</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.getWithdrawalRequests().then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='requestwithdrawal'>
+      requestWithdrawal
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Creates a new withdrawal request.</p>
+
+
+  <div class='pre p1 fill-light mt0'>requestWithdrawal(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, amount: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>), beneficiaryId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>type</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>
+            = <code>&#39;&#39;</code>)</code>
+	    Withdrawal types e.g. ZAR_EFT, NAD_EFT, KES_MPESA, MYR_IBG, IDR_LLG
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>amount</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>))</code>
+	    Amount to withdraw. The currency depends on the type
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>beneficiaryId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
+	    The beneficiary ID of the bank account the withdrawal will be paid out to.
+This parameter is required if you have multiple bank accounts.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.requestWithdrawal(<span class="hljs-string">'ZAR_EFT'</span>, <span class="hljs-number">1000</span>)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getwithdrawalstatus'>
+      getWithdrawalStatus
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Returns the status of a particular withdrawal request.</p>
+
+
+  <div class='pre p1 fill-light mt0'>getWithdrawalStatus(id: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>))</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>))</code>
+	    Withdrawal ID to retrieve
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.getWithdrawalStatus(<span class="hljs-number">1234</span>).then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='cancelwithdrawalrequest'>
+      cancelWithdrawalRequest
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Cancel a withdrawal request. This can only be done if the request is still in state PENDING.</p>
+
+
+  <div class='pre p1 fill-light mt0'>cancelWithdrawalRequest(id: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>))</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>))</code>
+	    ID of the withdrawal to cancel
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.cancelWithdrawalRequest(<span class="hljs-number">1234</span>).then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='send'>
+      send
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Send Bitcoin from your account to a Bitcoin address or email address.</p>
+
+
+  <div class='pre p1 fill-light mt0'>send(amount: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>), currency: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, address: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, description: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?, message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>amount</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)
+            = <code>&#39;&#39;</code>)</code>
+	    Amount to send as a decimal string
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>currency</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>
+            = <code>&#39;&#39;</code>)</code>
+	    Currency to send e.g. XBT
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>address</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>
+            = <code>&#39;&#39;</code>)</code>
+	    Destination Bitcoin address or email address to send to
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>description</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
+	    Description for the transaction to record on the account statement
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>message</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
+	    Message to send to the recipient. This is only relevant when sending to an email address
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.send(<span class="hljs-number">1000</span>, <span class="hljs-string">'XBT'</span>, <span class="hljs-string">'foo@bar.com'</span>)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='createquote'>
+      createQuote
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Creates a new quote to buy or sell a particular amount.</p>
+
+
+  <div class='pre p1 fill-light mt0'>createQuote(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, amount: (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>), pair: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>type</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>
+            = <code>&#39;&#39;</code>)</code>
+	    Possible types: BUY, SELL
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>amount</span> <code class='quiet'>((<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)
+            = <code>&#39;&#39;</code>)</code>
+	    Amount to buy or sell in the pair base currency
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>pair</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?
+            = <code>&#39;&#39;</code>)</code>
+	    Currency pair to trade e.g. XBTZAR, XBTMYR. The pair can also be flipped if you want to buy or sell the counter currency (e.g. ZARXBT)
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.createQuote(<span class="hljs-string">'BUY'</span>, <span class="hljs-number">1000</span>).then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getquote'>
+      getQuote
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Get the latest status of a quote.</p>
+
+
+  <div class='pre p1 fill-light mt0'>getQuote(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>
+            = <code>&#39;&#39;</code>)</code>
+	    ID of the quote to retrieve
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.getQuote(<span class="hljs-number">1234</span>).then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='exercisequote'>
+      exerciseQuote
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Exercise a quote to perform the trade. If there is sufficient balance available in your account, it will be debited and the counter amount credited.
+An error is returned if the quote has expired or if you have insufficient available balance.</p>
+
+
+  <div class='pre p1 fill-light mt0'>exerciseQuote(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>
+            = <code>&#39;&#39;</code>)</code>
+	    ID of the quote to exercise
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.exerciseQuote(<span class="hljs-number">1234</span>).then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='discardquote'>
+      discardQuote
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Discard a quote. Once a quote has been discarded, it cannot be exercised even if it has not expired yet.</p>
+
+
+  <div class='pre p1 fill-light mt0'>discardQuote(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>
+            = <code>&#39;&#39;</code>)</code>
+	    ID of the quote to discard
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>client.discardQuote(<span class="hljs-number">1234</span>).then(<span class="hljs-built_in">console</span>.log).catch(<span class="hljs-built_in">console</span>.log)</pre>
+    
   
 
   

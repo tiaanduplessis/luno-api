@@ -100,9 +100,21 @@ Returns the latest ticker indicators.
 
 -   `pair` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** Currency pair e.g. XBTZAR
 
+**Examples**
+
+```javascript
+client.getTicker().then(console.log).catch(console.log)
+```
+
 ### getAllTickers
 
 Returns the latest ticker indicators from all active Luno exchanges.
+
+**Examples**
+
+```javascript
+client.getAllTickers().then(console.log).catch(console.log)
+```
 
 ### getOrderBook
 
@@ -111,6 +123,12 @@ Returns a list of bids and asks in the order book
 **Parameters**
 
 -   `pair` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** Currency pair e.g. XBTZAR
+
+**Examples**
+
+```javascript
+client.getOrderBook().then(console.log).catch(console.log)
+```
 
 ### getTrades
 
@@ -122,6 +140,12 @@ At most 100 results are returned per call.
 -   `since` **([Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number) \| [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date))?** Fetch trades executed after this time
 -   `pair` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** Currency pair e.g. XBTZAR
 
+**Examples**
+
+```javascript
+client.getTrades(new Date('7/7/7')).then(console.log).catch(console.log)
+```
+
 ### createAccount
 
 Create an additional account for the specified currency.
@@ -129,21 +153,28 @@ Create an additional account for the specified currency.
 **Parameters**
 
 -   `name` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The label to use for this account e.g. "Trading ACC" (optional, default `''`)
--   `currency` **any** The currency code for the account you want to create e.g. XBT, IDR, MYR, ZAR (optional, default `'ZAR'`)
+-   `currency` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The currency code for the account you want to create e.g. XBT, IDR, MYR, ZAR (optional, default `''`)
 
 ### getBalances
 
 Return the list of all accounts and their respective balances.
 
+**Examples**
+
+```javascript
+client.getBalances().then(console.log).catch(console.log)
+```
+
 ### getTransactions
 
 Return a list of transaction entries from an account.
+ By default fetches the 100 most recent rows.
 
 **Parameters**
 
 -   `id` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))** Account ID (optional, default `''`)
--   `minRow` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))** Minimum of the row range to return (inclusive) (optional, default `1`)
--   `maxRow` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))** Maximum of the row range to return (exclusive) (optional, default `100`)
+-   `minRow` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))?** Minimum of the row range to return (inclusive) (optional, default `-100`)
+-   `maxRow` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))?** Maximum of the row range to return (exclusive) (optional, default `0`)
 
 ### getPendingTransactions
 
@@ -159,8 +190,8 @@ Returns a list of the most recently placed orders
 
 **Parameters**
 
--   `state` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Filter to only orders of this state e.g. PENDING
--   `pair` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Filter to only orders of this currency pair e.g. XBTZAR
+-   `state` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filter to only orders of this state e.g. PENDING
+-   `pair` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filter to only orders of this currency pair e.g. XBTZAR
 
 ### postOrder
 
@@ -169,9 +200,9 @@ Create a new trade order.
 **Parameters**
 
 -   `type` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** "BID" for a bid (buy) limit order or "ASK" for an ask (sell) limit order (optional, default `''`)
--   `volume` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Amount of Bitcoin to buy or sell as a decimal string in units of BTC e.g. "1.423" (optional, default `''`)
--   `price` **any** Limit price as a decimal string in units of ZAR/BTC e.g. "1200". (optional, default `''`)
--   `pair` **any** The currency pair to trade e.g. XBTZAR (optional, default `''`)
+-   `volume` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))** Amount of Bitcoin to buy or sell as a decimal string in units of BTC e.g. "1.423" (optional, default `''`)
+-   `price` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))** Limit price as a decimal string in units of ZAR/BTC e.g. "1200". (optional, default `''`)
+-   `pair` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** The currency pair to trade e.g. XBTZAR (optional, default `''`)
 
 ### postMarketOrder
 
@@ -200,6 +231,12 @@ Get an order by its id.
 
 -   `id` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The order ID (optional, default `''`)
 
+**Examples**
+
+```javascript
+client.getOrder(1234).then(console.log).catch(console.log)
+```
+
 ### getTradesList
 
 Returns a list of your recent trades for a given pair, sorted by oldest first.
@@ -208,7 +245,192 @@ Returns a list of your recent trades for a given pair, sorted by oldest first.
 
 -   `since` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Filter to trades on or after this timestamp, e.g. 1470810728478
 -   `limit` **[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)** Limit to this number of trades (min 1, max 100, default 100)
--   `pair` **any** Filter to trades of this currency pair e.g. XBTZAR
+-   `pair` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filter to trades of this currency pair e.g. XBTZAR
+
+**Examples**
+
+```javascript
+client.getTradesList(new Date('7/7/7'), 50).then(console.log).catch(console.log)
+```
+
+### getReceiveAddress
+
+Returns the default receive address associated with your account and the amount received via the address.
+You can specify an optional address parameter to return information for a non-default receive address.
+In the response, total_received is the total confirmed Bitcoin amount received excluding unconfirmed transactions.
+total_unconfirmed is the total sum of unconfirmed receive transactions.
+
+**Parameters**
+
+-   `asset` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Currency code of the asset e.g. XBT (optional, default `''`)
+-   `address` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** Specific Bitcoin address to retrieve. If not provided, the default address will be used
+
+**Examples**
+
+```javascript
+client.getReceiveAddress('XBT').then(console.log).catch(console.log)
+```
+
+### createReceiveAddress
+
+Allocates a new receive address to your account.
+There is a rate limit of 1 address per hour, but bursts of up to 10 addresses are allowed.
+
+**Parameters**
+
+-   `asset` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Currency code of the asset e.g. XBT (optional, default `''`)
+
+**Examples**
+
+```javascript
+client.createReceiveAddress('XBT').then(console.log).catch(console.log)
+```
+
+### getFeeInfo
+
+Returns your fees and 30 day trading volume (as of midnight) for a given pair.
+
+**Parameters**
+
+-   `pair` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** Filter to trades of this currency pair e.g. XBTZAR (optional, default `''`)
+
+**Examples**
+
+```javascript
+client.getFeeInfo('XBTZAR').then(console.log).catch(console.log)
+```
+
+### getWithdrawalRequests
+
+Returns a list of withdrawal requests.
+
+**Examples**
+
+```javascript
+client.getWithdrawalRequests().then(console.log).catch(console.log)
+```
+
+### requestWithdrawal
+
+Creates a new withdrawal request.
+
+**Parameters**
+
+-   `type` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Withdrawal types e.g. ZAR_EFT, NAD_EFT, KES_MPESA, MYR_IBG, IDR_LLG (optional, default `''`)
+-   `amount` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))** Amount to withdraw. The currency depends on the type
+-   `beneficiaryId` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** The beneficiary ID of the bank account the withdrawal will be paid out to.
+                                   This parameter is required if you have multiple bank accounts.
+
+**Examples**
+
+```javascript
+client.requestWithdrawal('ZAR_EFT', 1000)
+```
+
+### getWithdrawalStatus
+
+Returns the status of a particular withdrawal request.
+
+**Parameters**
+
+-   `id` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))** Withdrawal ID to retrieve
+
+**Examples**
+
+```javascript
+client.getWithdrawalStatus(1234).then(console.log).catch(console.log)
+```
+
+### cancelWithdrawalRequest
+
+Cancel a withdrawal request. This can only be done if the request is still in state PENDING.
+
+**Parameters**
+
+-   `id` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))** ID of the withdrawal to cancel
+
+**Examples**
+
+```javascript
+client.cancelWithdrawalRequest(1234).then(console.log).catch(console.log)
+```
+
+### send
+
+Send Bitcoin from your account to a Bitcoin address or email address.
+
+**Parameters**
+
+-   `amount` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))** Amount to send as a decimal string (optional, default `''`)
+-   `currency` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Currency to send e.g. XBT (optional, default `''`)
+-   `address` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Destination Bitcoin address or email address to send to (optional, default `''`)
+-   `description` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** Description for the transaction to record on the account statement
+-   `message` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** Message to send to the recipient. This is only relevant when sending to an email address
+
+**Examples**
+
+```javascript
+client.send(1000, 'XBT', 'foo@bar.com')
+```
+
+### createQuote
+
+Creates a new quote to buy or sell a particular amount.
+
+**Parameters**
+
+-   `type` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Possible types: BUY, SELL (optional, default `''`)
+-   `amount` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number))** Amount to buy or sell in the pair base currency (optional, default `''`)
+-   `pair` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)?** Currency pair to trade e.g. XBTZAR, XBTMYR. The pair can also be flipped if you want to buy or sell the counter currency (e.g. ZARXBT) (optional, default `''`)
+
+**Examples**
+
+```javascript
+client.createQuote('BUY', 1000).then(console.log).catch(console.log)
+```
+
+### getQuote
+
+Get the latest status of a quote.
+
+**Parameters**
+
+-   `id` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** ID of the quote to retrieve (optional, default `''`)
+
+**Examples**
+
+```javascript
+client.getQuote(1234).then(console.log).catch(console.log)
+```
+
+### exerciseQuote
+
+Exercise a quote to perform the trade. If there is sufficient balance available in your account, it will be debited and the counter amount credited.
+An error is returned if the quote has expired or if you have insufficient available balance.
+
+**Parameters**
+
+-   `id` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** ID of the quote to exercise (optional, default `''`)
+
+**Examples**
+
+```javascript
+client.exerciseQuote(1234).then(console.log).catch(console.log)
+```
+
+### discardQuote
+
+Discard a quote. Once a quote has been discarded, it cannot be exercised even if it has not expired yet.
+
+**Parameters**
+
+-   `id` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** ID of the quote to discard (optional, default `''`)
+
+**Examples**
+
+```javascript
+client.discardQuote(1234).then(console.log).catch(console.log)
+```
 
 ## Contributing
 
