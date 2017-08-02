@@ -284,4 +284,4 @@ class Luno {
   }
 }
 
-module.export = Luno
+module.exports = Luno
