@@ -20,6 +20,9 @@
   <a href="https://github.com/prettier/prettier">
     <img src="https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square" alt="prettier code formatting" />
   </a>
+<a href="https://codecov.io/gh/tiaanduplessis/luno-api">
+  <img src="https://codecov.io/gh/tiaanduplessis/luno-api/branch/master/graph/badge.svg?style=flat-square" alt="Codecov" />
+</a>
   <a href="https://travis-ci.org/tiaanduplessis/luno-api">
     <img src="https://img.shields.io/travis/tiaanduplessis/luno-api.svg?style=flat-square" alt="travis ci build status" />
   </a>
