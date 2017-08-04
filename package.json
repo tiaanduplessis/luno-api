@@ -15,6 +15,7 @@
   ],
   "scripts": {
     "test": "jest",
+    "test:cov": "npm run test -- --coverage",
     "format": "prettier-standard index.js",
     "format:fix": "npm run format -- --fix",
     "start": "npm run test",
