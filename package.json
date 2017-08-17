@@ -1,6 +1,6 @@
 {
   "name": "luno-api",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Luno API wrapper",
   "license": "MIT",
   "repository": {
