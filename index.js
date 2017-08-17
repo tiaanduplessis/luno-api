@@ -6,36 +6,12 @@ const fetch = require('node-fetch')
 const qs = require('qs')
 const stringify = require('fast-safe-stringify')
 
-const BASE_URL = 'https://api.mybitx.com/api/1'
-
-function createRequest ({ path, headers, query, data, method } = {}) {
-  const opts = {
-    headers,
-    method: method || (data ? 'POST' : 'GET')
-  }
-
-  if (data) {
-    opts.body = stringify(data)
-  }
-
-  return fetch(
-    `${BASE_URL}${path}${query ? `?${qs.stringify(query)}` : ''}`,
-    opts
-  ).then(res => {
-    if (res.ok) {
-      return res.json()
-    }
-
-    return Promise.reject({
-      error: { status: res.status, message: res.statusText }
-    })
-  })
-}
+const BASE_URL = 'https://api.mybitx.com/api'
 
 class Luno {
-  constructor ({ key, secret, defaultPair } = {}) {
-    assert(key, 'no key provided')
-    assert(secret, 'no secret provided')
+  constructor ({ key, secret, defaultPair, version = '1' } = {}) {
+    assert(key, 'Luno:constructor - no key provided')
+    assert(secret, 'Luno:constructor - no secret provided')
 
     this.headers = {
       Accept: 'application/json',
@@ -44,6 +20,8 @@ class Luno {
         'base64'
       )}`
     }
+
+    this.url = `${BASE_URL}/${version}`
 
     this.defaultPair = defaultPair || 'XBTZAR'
   }
@@ -57,12 +35,12 @@ class Luno {
    * client.getTicker().then(console.log).catch(console.log)
    *
    */
-  getTicker (pair) {
+  getTicker (pair = '') {
     pair = pair || this.defaultPair
 
     return createRequest({
       headers: this.headers,
-      path: '/ticker',
+      url: `${this.url}/ticker`,
       query: { pair }
     })
   }
@@ -76,7 +54,7 @@ class Luno {
    */
   getAllTickers () {
     return createRequest({
-      path: '/tickers',
+      url: `${this.url}/tickers`,
       headers: this.headers
     })
   }
@@ -90,11 +68,11 @@ class Luno {
    * client.getOrderBook().then(console.log).catch(console.log)
    *
    */
-  getOrderBook (pair) {
+  getOrderBook (pair = '') {
     pair = pair || this.defaultPair
 
     return createRequest({
-      path: '/orderbook',
+      url: `${this.url}/orderbook`,
       query: { pair },
       headers: this.headers
     })
@@ -111,7 +89,7 @@ class Luno {
    * client.getTrades(new Date('7/7/7')).then(console.log).catch(console.log)
    *
    */
-  getTrades (since, pair) {
+  getTrades (since, pair = '') {
     pair = pair || this.defaultPair
 
     if (since && since instanceof Date) {
@@ -120,7 +98,7 @@ class Luno {
 
     return createRequest({
       headers: this.headers,
-      path: '/trades',
+      url: `${this.url}/trades`,
       query: { pair, since }
     })
   }
@@ -132,12 +110,12 @@ class Luno {
    * @param {String} currency The currency code for the account you want to create e.g. XBT, IDR, MYR, ZAR
    */
   createAccount (name = '', currency = '') {
-    assert(name, 'name is required')
-    assert(currency, 'currency is required')
+    assert(name, 'Luno:createAccount - name is required')
+    assert(currency, 'Luno:createAccount - currency is required')
 
     return createRequest({
       headers: this.headers,
-      path: '/accounts',
+      url: `${this.url}/accounts`,
       data: { currency, name }
     })
   }
@@ -152,13 +130,13 @@ class Luno {
   getBalances () {
     return createRequest({
       headers: this.headers,
-      path: '/balance'
+      url: `${this.url}/balance`
     })
   }
 
   /**
    * Return a list of transaction entries from an account.
-   *  By default fetches the 100 most recent rows.
+   * By default fetches the 100 most recent rows.
    *
    * @param {String|Number} id Account ID
    * @param {String|Number=} minRow Minimum of the row range to return (inclusive)
@@ -166,11 +144,11 @@ class Luno {
    *
    */
   getTransactions (id = '', minRow = -100, maxRow = 0) {
-    assert(id, 'account ID is required')
+    assert(id, 'Luno:getTransactions - account ID is required')
 
     return createRequest({
       headers: this.headers,
-      path: `/accounts/${id}/transactions`,
+      url: `${this.url}/accounts/${id}/transactions`,
       query: { min_row: minRow, max_row: maxRow }
     })
   }
@@ -182,11 +160,11 @@ class Luno {
    *
    */
   getPendingTransactions (id = '') {
-    assert(id, 'account ID is required')
+    assert(id, 'Luno:getPendingTransactions - account ID is required')
 
     return createRequest({
       headers: this.headers,
-      path: `/accounts/${id}/pending`
+      url: `${this.url}/accounts/${id}/pending`
     })
   }
 
@@ -199,7 +177,7 @@ class Luno {
   getOrderList (state, pair) {
     return createRequest({
       headers: this.headers,
-      path: '/listorders',
+      url: `${this.url}/listorders`,
       query: { state, pair }
     })
   }
@@ -213,15 +191,20 @@ class Luno {
    * @param {String=} pair The currency pair to trade e.g. XBTZAR
    */
   postOrder (type = '', volume = '', price = '', pair = '') {
-    assert(type === 'BID' || type === 'ASK', 'type should be BID or ASK')
-    assert(volume, 'volume is required')
-    assert(price, 'price is required')
+    assert(typeof type === 'string', 'Luno:postOrder - type should be a string')
+    type = type.toUpperCase()
+    assert(
+      type === 'BID' || type === 'ASK',
+      'Luno:postOrder - type should be BID or ASK'
+    )
+    assert(volume, 'Luno:postOrder - volume is required')
+    assert(price, 'Luno:postOrder - price is required')
 
     pair = pair || this.defaultPair
 
     return createRequest({
       headers: this.headers,
-      path: '/postorder',
+      url: `${this.url}/postorder`,
       data: {
         type,
         volume,
@@ -240,8 +223,16 @@ class Luno {
    * @param {String} pair The currency pair to trade e.g. XBTZAR
    */
   postMarketOrder (type = '', volume = '', pair) {
-    assert(type === 'BUY' || type === 'SELL', 'type should be BUY or SELL')
-    assert(volume, 'volume is required')
+    assert(
+      typeof type === 'string',
+      'Luno:postMarketOrder - type should be a string'
+    )
+    type = type.toUpperCase()
+    assert(
+      type === 'BUY' || type === 'SELL',
+      'Luno:postMarketOrder - type should be BUY or SELL'
+    )
+    assert(volume, 'Luno:postMarketOrder - volume is required')
 
     pair = pair || this.defaultPair
 
@@ -258,7 +249,7 @@ class Luno {
 
     return createRequest({
       headers: this.headers,
-      path: '/marketorder',
+      url: `${this.url}/marketorder`,
       data
     })
   }
@@ -270,11 +261,11 @@ class Luno {
    *
    */
   stopOrder (id = '') {
-    assert(id, 'order ID is required')
+    assert(id, 'Luno:stopOrder - order ID is required')
 
     return createRequest({
       headers: this.headers,
-      path: '/stoporder',
+      url: `${this.url}/stoporder`,
       data: {
         order_id: id
       }
@@ -291,19 +282,19 @@ class Luno {
    *
    */
   getOrder (id = '') {
-    assert(id, 'order ID is required')
+    assert(id, 'Luno:getOrder - order ID is required')
 
     return createRequest({
       headers: this.headers,
-      path: `/orders/${id}`
+      url: `${this.url}/orders/${id}`
     })
   }
 
   /**
    * Returns a list of your recent trades for a given pair, sorted by oldest first.
    *
-   * @param {Number} since Filter to trades on or after this timestamp, e.g. 1470810728478
-   * @param {Number} limit Limit to this number of trades (min 1, max 100, default 100)
+   * @param {Number=} since Filter to trades on or after this timestamp, e.g. 1470810728478
+   * @param {Number=} limit Limit to this number of trades (min 1, max 100, default 100)
    * @param {String=} pair Filter to trades of this currency pair e.g. XBTZAR
    *
    * @example
@@ -319,7 +310,7 @@ class Luno {
 
     return createRequest({
       headers: this.headers,
-      path: `/listtrades`,
+      url: `${this.url}/listtrades`,
       query: { pair, since, limit }
     })
   }
@@ -338,11 +329,11 @@ class Luno {
    * client.getReceiveAddress('XBT').then(console.log).catch(console.log)
    */
   getReceiveAddress (asset = '', address) {
-    assert(asset, 'asset is required')
+    assert(asset, 'Luno:getReceiveAddress - asset is required')
 
     return createRequest({
       headers: this.headers,
-      path: '/funding_address',
+      url: `${this.url}/funding_address`,
       query: { asset, address }
     })
   }
@@ -359,11 +350,11 @@ class Luno {
    *
    */
   createReceiveAddress (asset = '') {
-    assert(asset, 'asset is required')
+    assert(asset, 'Luno:createReceiveAddress - asset is required')
 
     return createRequest({
       headers: this.headers,
-      path: '/funding_address',
+      url: `${this.url}/funding_address`,
       data: {
         asset
       }
@@ -383,7 +374,7 @@ class Luno {
 
     return createRequest({
       headers: this.headers,
-      path: '/fee_info',
+      url: `${this.url}/fee_info`,
       query: { pair }
     })
   }
@@ -398,7 +389,7 @@ class Luno {
   getWithdrawalRequests () {
     return createRequest({
       headers: this.headers,
-      path: '/withdrawals'
+      url: `${this.url}/withdrawals`
     })
   }
 
@@ -416,8 +407,8 @@ class Luno {
    *
    */
   requestWithdrawal (type = '', amount, beneficiaryId) {
-    assert(type, 'type is required')
-    assert(amount, 'amount is required')
+    assert(type, 'Luno:requestWithdrawal - type is required')
+    assert(amount, 'Luno:requestWithdrawal - amount is required')
 
     const data = {
       type,
@@ -430,7 +421,7 @@ class Luno {
 
     return createRequest({
       headers: this.headers,
-      path: '/withdrawals',
+      url: `${this.url}/withdrawals`,
       data
     })
   }
@@ -445,11 +436,11 @@ class Luno {
    *
    */
   getWithdrawalStatus (id) {
-    assert(id, 'id is required')
+    assert(id, 'Luno:getWithdrawalStatus - id is required')
 
     return createRequest({
       headers: this.headers,
-      path: `/withdrawals/${id}`
+      url: `${this.url}/withdrawals/${id}`
     })
   }
 
@@ -463,11 +454,11 @@ class Luno {
    *
    */
   cancelWithdrawalRequest (id) {
-    assert(id, 'id is required')
+    assert(id, 'Luno:cancelWithdrawalRequest - id is required')
 
     return createRequest({
       headers: this.headers,
-      path: `/withdrawals/${id}`,
+      url: `${this.url}/withdrawals/${id}`,
       method: 'DELETE'
     })
   }
@@ -486,9 +477,9 @@ class Luno {
    *
    */
   send (amount = '', currency = '', address = '', description, message) {
-    assert(amount, 'amount is required')
-    assert(currency, 'currency is required')
-    assert(address, 'address is required')
+    assert(amount, 'Luno:send - amount is required')
+    assert(currency, 'Luno:send - currency is required')
+    assert(address, 'Luno:send - address is required')
 
     const data = {
       amount,
@@ -506,7 +497,7 @@ class Luno {
 
     return createRequest({
       headers: this.headers,
-      path: '/send',
+      url: `${this.url}/send`,
       data
     })
   }
@@ -523,14 +514,22 @@ class Luno {
    *
    */
   createQuote (type = '', amount = '', pair = '') {
-    assert(type === 'BUY' || type === 'SELL', 'type should be BUY or SELL')
-    assert(amount, 'amount is required')
+    assert(
+      typeof type === 'string',
+      'Luno:createQuote - type should be a string'
+    )
+    type = type.toUpperCase()
+    assert(
+      type === 'BUY' || type === 'SELL',
+      'Luno:createQuote - type should be BUY or SELL'
+    )
+    assert(amount, 'Luno:createQuote - amount is required')
 
     pair = pair || this.defaultPair
 
     return createRequest({
       headers: this.headers,
-      path: '/quotes',
+      url: `${this.url}/quotes`,
       data: {
         type,
         base_amount: amount,
@@ -549,10 +548,10 @@ class Luno {
    *
    */
   getQuote (id = '') {
-    assert(id, 'quote ID is required')
+    assert(id, 'Luno:getQuote - quote ID is required')
     return createRequest({
       headers: this.headers,
-      path: `/quotes/${id}`
+      url: `${this.url}/quotes/${id}`
     })
   }
 
@@ -567,10 +566,10 @@ class Luno {
    *
    */
   exerciseQuote (id = '') {
-    assert(id, 'quote ID is required')
+    assert(id, 'Luno:exerciseQuote - quote ID is required')
     return createRequest({
       headers: this.headers,
-      path: `/quotes/${id}`,
+      url: `${this.url}/quotes/${id}`,
       method: 'PUT'
     })
   }
@@ -584,13 +583,37 @@ class Luno {
    * client.discardQuote(1234).then(console.log).catch(console.log)
    */
   discardQuote (id = '') {
-    assert(id, 'quote ID is required')
+    assert(id, 'Luno:discardQuote - quote ID is required')
     return createRequest({
       headers: this.headers,
-      path: `/quotes/${id}`,
+      url: `${this.url}/quotes/${id}`,
       method: 'DELETE'
     })
   }
+}
+
+const createRequest = ({ url, headers, query, data, method } = {}) => {
+  const opts = {
+    headers,
+    method: method || (data ? 'POST' : 'GET')
+  }
+
+  if (data) {
+    opts.body = stringify(data)
+  }
+
+  return fetch(
+    `${url}${query ? `?${qs.stringify(query)}` : ''}`,
+    opts
+  ).then(res => {
+    if (res.ok) {
+      return res.json()
+    }
+
+    return Promise.reject({
+      error: { status: res.status, message: res.statusText }
+    })
+  })
 }
 
 module.exports = Luno
