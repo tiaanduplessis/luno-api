@@ -29,8 +29,8 @@
   "devDependencies": {
     "documentation": "^5.1.0",
     "husky": "^0.14.3",
-    "jest": "^20.0.4",
-    "prettier-standard": "^6.0.0"
+    "jest": "^21.2.1",
+    "prettier-standard": "^7.0.1"
   },
   "dependencies": {
     "fast-safe-stringify": "^1.2.0",
