@@ -63,6 +63,8 @@
 
 ## About
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/tiaanduplessis/luno-api.svg)](https://greenkeeper.io/)
+
 Promise based wrapper around the [Luno API](https://www.luno.com/en/api).
 
 ## Install
