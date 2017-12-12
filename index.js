@@ -303,7 +303,7 @@ class Luno {
    */
   getTradesList (since, limit, pair) {
     if (since && since instanceof Date) {
-      since = since.getTime() / 1000 // Convert to unix timestamp
+      since = since.getTime() // Convert to unix timestamp
     }
 
     pair = pair || this.defaultPair
