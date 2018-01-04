@@ -11,14 +11,15 @@ const BASE_URL = 'https://api.mybitx.com/api'
 
 class Luno {
   constructor ({ key, secret, defaultPair, version = '1' } = {}) {
-
     this.headers = {
       Accept: 'application/json',
-      'Accept-Charset': 'utf-8',
+      'Accept-Charset': 'utf-8'
     }
 
     if (key && secret) {
-      Object.assign(this.headers, {Authorization: `Basic ${base64.encode(key + ':' + secret)}`})
+      Object.assign(this.headers, {
+        Authorization: `Basic ${base64.encode(key + ':' + secret)}`
+      })
     }
 
     this.url = `${BASE_URL}/${version}`
@@ -602,18 +603,17 @@ const createRequest = ({ url, headers, query, data, method } = {}) => {
     opts.body = stringify(data)
   }
 
-  return fetch(
-    `${url}${query ? `?${qs.stringify(query)}` : ''}`,
-    opts
-  ).then(res => {
-    if (res.ok) {
-      return res.json()
-    }
+  return fetch(`${url}${query ? `?${qs.stringify(query)}` : ''}`, opts).then(
+    res => {
+      if (res.ok) {
+        return res.json()
+      }
 
-    return Promise.reject({
-      error: { status: res.status, message: res.statusText }
-    })
-  })
+      return Promise.reject({
+        error: { status: res.status, message: res.statusText }
+      })
+    }
+  )
 }
 
 module.exports = Luno
