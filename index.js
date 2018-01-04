@@ -5,20 +5,20 @@ const assert = require('assert')
 const fetch = require('node-fetch')
 const qs = require('qs')
 const stringify = require('fast-safe-stringify')
+const base64 = require('base-64')
 
 const BASE_URL = 'https://api.mybitx.com/api'
 
 class Luno {
   constructor ({ key, secret, defaultPair, version = '1' } = {}) {
-    assert(key, 'Luno:constructor - no key provided')
-    assert(secret, 'Luno:constructor - no secret provided')
 
     this.headers = {
       Accept: 'application/json',
       'Accept-Charset': 'utf-8',
-      Authorization: `Basic ${new Buffer(key + ':' + secret).toString(
-        'base64'
-      )}`
+    }
+
+    if (key && secret) {
+      Object.assign(this.headers, {Authorization: `Basic ${base64.encode(key + ':' + secret)}`})
     }
 
     this.url = `${BASE_URL}/${version}`
