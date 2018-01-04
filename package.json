@@ -17,22 +17,22 @@
     "test": "jest",
     "test:cov": "npm run test -- --coverage",
     "format": "prettier-standard index.js",
-    "format:fix": "npm run format -- --fix",
     "start": "npm run test",
     "precommit": "npm run format",
-    "pretest": "npm run format:fix",
+    "pretest": "npm run format",
     "docs": "npm run docs:readme && npm run docs:html",
     "docs:readme": "documentation readme index.js --section=API",
     "docs:html": "documentation build index.js -f html -o docs"
   },
   "author": "tiaanduplessis <tiaanduplessis@hotmail.com>",
   "devDependencies": {
-    "documentation": "^5.1.0",
+    "documentation": "^5.3.5",
     "husky": "^0.14.3",
-    "jest": "^22.0.0",
+    "jest": "^22.0.4",
     "prettier-standard": "^8.0.0"
   },
   "dependencies": {
+    "base-64": "^0.1.0",
     "fast-safe-stringify": "^1.2.0",
     "node-fetch": "^1.7.1",
     "qs": "^6.5.0"
