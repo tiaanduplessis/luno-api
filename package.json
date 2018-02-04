@@ -34,7 +34,7 @@
   "dependencies": {
     "base-64": "^0.1.0",
     "fast-safe-stringify": "^2.0.0",
-    "node-fetch": "^1.7.1",
+    "node-fetch": "^2.0.0",
     "qs": "^6.5.0"
   }
 }
