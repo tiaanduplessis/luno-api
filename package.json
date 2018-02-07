@@ -28,13 +28,13 @@
   "devDependencies": {
     "documentation": "^5.3.5",
     "husky": "^0.14.3",
-    "jest": "^22.0.4",
+    "jest": "^22.2.1",
     "prettier-standard": "^8.0.0"
   },
   "dependencies": {
     "base-64": "^0.1.0",
-    "fast-safe-stringify": "^2.0.0",
+    "fast-safe-stringify": "^2.0.2",
     "node-fetch": "^2.0.0",
-    "qs": "^6.5.0"
+    "qs": "^6.5.1"
   }
 }
