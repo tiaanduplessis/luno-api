@@ -4,7 +4,6 @@ const assert = require('assert')
 
 const fetch = require('node-fetch')
 const qs = require('qs')
-const stringify = require('fast-safe-stringify')
 const base64 = require('base-64')
 
 const BASE_URL = 'https://api.mybitx.com/api'
@@ -448,7 +447,7 @@ class Luno {
   /**
    * Cancel a withdrawal request. This can only be done if the request is still in state PENDING.
    *
-   * @param {String|Number} id 	ID of the withdrawal to cancel
+   * @param {String|Number} id ID of the withdrawal to cancel
    *
    * @example
    * client.cancelWithdrawalRequest(1234).then(console.log).catch(console.log)
@@ -596,11 +595,12 @@ class Luno {
 const createRequest = ({ url, headers, query, data, method } = {}) => {
   const opts = {
     headers,
-    method: method || (data ? 'POST' : 'GET')
+    method: method ? method.toUpperCase() : (data ? 'POST' : 'GET')
   }
 
   if (data) {
-    opts.body = stringify(data)
+    opts.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+    opts.body = jsonToURLEncodedForm(data)
   }
 
   return fetch(`${url}${query ? `?${qs.stringify(query)}` : ''}`, opts).then(
@@ -609,11 +609,18 @@ const createRequest = ({ url, headers, query, data, method } = {}) => {
         return res.json()
       }
 
-      return Promise.reject({
-        error: { status: res.status, message: res.statusText }
-      })
+      return Promise.reject(new Error(`${res.status}: ${res.statusText}`))
     }
   )
+}
+
+function jsonToURLEncodedForm (json = {}) {
+  let form = []
+  for (var key in json) {
+    form.push(encodeURIComponent(key) + '=' + encodeURIComponent(json[key]))
+  }
+
+  return form.join('&')
 }
 
 module.exports = Luno
