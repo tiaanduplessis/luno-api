@@ -1,6 +1,6 @@
 {
   "name": "luno-api",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Luno API wrapper",
   "license": "MIT",
   "repository": {
@@ -33,7 +33,9 @@
     "qs": "^6.6.0"
   },
   "standard": {
-    "ignore": ["docs"],
+    "ignore": [
+      "docs"
+    ],
     "env": {
       "jest": true
     }
